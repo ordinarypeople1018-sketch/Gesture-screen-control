@@ -9,6 +9,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unzip project
         run: unzip -q GestureControl.zip
+      - name: Fix build script
+        run: |
+          sed -i 's/java\.net\.URL(modelUrl)/uri(modelUrl).toURL()/' GestureControl/app/build.gradle.kts
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
