@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unzip project
-        run: unzip -q GestureControl.zip
-      - name: Fix build script
+      - name: Unzip newest project zip
         run: |
-          sed -i 's/java\.net\.URL(modelUrl)/uri(modelUrl).toURL()/' GestureControl/app/build.gradle.kts
+          ZIP=$(ls GestureControl*.zip | sort -V | tail -1)
+          echo "Using $ZIP"
+          unzip -q "$ZIP"
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
